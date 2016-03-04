@@ -3,9 +3,9 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-To run locally:
-Go to directory of project /five-percent in Terminal
-Type "rails server"
-Go to browser and type: "localhost:3000/users/sign_in"
-Sign-up as a new user to test out the website (it is a demo website, so no confirmation needed)
+*To run locally:
+*Go to directory of project /five-percent in Terminal
+*Type "rails server"
+*Go to browser and type: "localhost:3000/users/sign_in"
+*Sign-up as a new user to test out the website (it is a demo website, so no confirmation needed)
 
