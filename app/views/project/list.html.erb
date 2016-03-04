@@ -1,0 +1,18 @@
+<%if !session[:id] then %>
+      <a class="navigation" href="/users/sign_in">Sign In / Sign Up</a>
+<%end%>
+<div><%= image_tag 'infograph_five_percent.jpg', :class => 'infograph'%></div>
+<ul>
+	<% if @projects.empty? %>
+        <div>NO PROJECTS</div>
+      <% end %>
+      <% @projects.each do |project| %>
+      <div class="project_box">
+      	<div><%= image_tag project.img_file, :class => 'thumbnail'%></div>
+      	<div class="title"><a class="title" href="/project/index/<%= project.id %>"><%= project.title %></a></div>
+      	<div class="project_by">Project By: <%= project.founder %></div>
+      	<div><span class="location">Location:</span> <%= project.location %></div>
+      	<div><span class="description">Description:</span> <%= project.description %></div>
+      </div>
+      <% end %>
+</ul>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>FivePercent</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="banner"><%= image_tag "five_percent_banner.gif", :class => "banner_img"%></div>
+<%if session[:id] then %>
+            <a class="navigation logout" href="/users/logout">Hi, <%= User.getName session[:id]%>! Click to Logout</a>
+ <%end%>
+<%= yield %>
+
+</body>
+</html>
+

@@ -1,0 +1,51 @@
+<a class="navigation" href="/project/list">Back to Projects</a>
+<!-- <%= image_tag @project.img_file %> -->
+<h1><%= @project.title %></h1>
+<div>
+  <div class="project_info">
+    <div class="project_by">Project By: <%= @project.founder %></div>
+        <div><span class="location">Location:</span> <%= @project.location %></div>
+        <div><span class="description">Description:</span> <%= @project.description %></div>
+  </div>
+  <div class="project_image"><%= image_tag @project.img_file, :class => 'about_photo'%></div>
+</div>
+<div class="board">
+  <h1 class="board_header"> PROJECT BOARD</h1>
+  <%if session[:id] then %>
+    <% name = User.getName session[:id] %>
+    <%= form_for(:list, :html => {:class => "list_form"}, :url => {:action => :add_list}) do |form| %>
+     <%= form.text_field(:title, :placeholder => 'Thread Topic') %>
+     <%= form.hidden_field(:starter, :value => name) %>
+     <%= form.submit "POST THREAD", :class => 'post_thread' %>
+     <% end %>
+<%end%>
+	<% @lists.each do |list| %>
+		<div class="list">
+			<p class="list_title"> <%= list.title %> by <%= list.starter %></p>
+			<% Comment.where(:list_id => list.id).each do |comment| %>
+        <% colors = User.getColors comment.name %>
+				<div class="comment" style="background-color: rgba(<%= colors[0] %>, <%= colors[1] %>,
+          <%= colors[2] %>, 0.25)">
+          <%if comment.file_name then %>
+              <div><%= image_tag comment.file_name, :class => 'comment_photo' %></div>
+          <% end %>
+          <div class="comment_text"> <%= comment.text %> </div>
+          <div class="comment_signature">by <%= comment.name %> on <%=comment.date_time %></div>
+        </div>
+        
+			<% end %>
+      <%if session[:id] then %>
+        <% name = User.getName session[:id] %>
+        <%= form_for(:comment, :html => {:class => "comment_form"}, :url => {:action => :add_comment}) do |form| %>
+          <%= form.file_field(:file_name) %>
+          <%= form.text_field(:text, :placeholder => 'comment') %>
+          <%= form.hidden_field(:name, :value => name) %>
+          <%= form.hidden_field(:list_id, :value => list.id)%>
+          <%= form.submit "COMMENT", :class => 'add_comment' %>
+        <% end %>
+      <% end %>
+		</div>
+	<% end %>
+
+	
+</div>
